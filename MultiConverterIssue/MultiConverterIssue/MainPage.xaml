@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MultiConverterIssue"
+             xmlns:converters="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="MultiConverterIssue.MainPage">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Converters.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="Center"
+                 HorizontalOptions="Center">
+        <!-- Place new controls here -->
+        <Label Text="Welcome to Xamarin.Forms!"
+               TextColor="{Binding EnumValue, Converter={StaticResource MyMultiConverter}, ConverterParameter={x:Static local:SomeEnum.C}}"/>
+        <Picker ItemsSource="{Binding EnumValues}"
+                SelectedItem="{Binding EnumValue}" />
+    </StackLayout>
+
+</ContentPage>
